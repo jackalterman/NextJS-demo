@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Zap, Shield, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 
 export function Hero() {
   return (

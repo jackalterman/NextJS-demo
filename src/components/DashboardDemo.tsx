@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { BarChart3, Users, DollarSign, Activity, ChevronRight, Search } from "lucide-react"
+import { motion } from "framer-motion"
+import { Users, DollarSign, Activity, ChevronRight, Search } from "lucide-react"
 
 const stats = [
   { label: "Active Users", value: "2,543", icon: Users, trend: "+12%" },
@@ -23,6 +23,24 @@ export function DashboardDemo() {
               Experience the fluidity of modern React state management and motion. 
               Our components are designed for high-density data and intuitive user flow.
             </p>
+            
+            {/* Functional Tabs */}
+            <div className="flex bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl mb-8 w-fit">
+              {["overview", "analytics"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-all ${
+                    activeTab === tab 
+                      ? "bg-white dark:bg-zinc-950 shadow-sm text-blue-600" 
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
             <ul className="space-y-4">
               {["Real-time Updates", "Responsive Data Grids", "Dynamic Filtering"].map((item, i) => (
                 <li key={i} className="flex items-center gap-3 font-medium">
@@ -80,8 +98,8 @@ export function DashboardDemo() {
                       <motion.div 
                         key={i}
                         initial={{ height: 0 }}
-                        animate={{ height: `${h}%` }}
-                        transition={{ duration: 1, delay: i * 0.1 }}
+                        animate={{ height: activeTab === "overview" ? `${h}%` : `${100 - h}%` }}
+                        transition={{ duration: 0.5, delay: i * 0.05 }}
                         className="flex-1 bg-blue-600/20 hover:bg-blue-600/40 rounded-t-sm relative group cursor-pointer"
                       >
                         <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-sm" />
